@@ -20,7 +20,13 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
-
+- task: AzureVmssDeployment@0
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise Subscription(1)(ef1132e9-78b9-4d53-b52d-2b6411829135)'
+    action: 'Update image'
+    vmssName: 'AgentPoolVMSS'
+    vmssOsType: 'Windows'
+    imageUrl: '/subscriptions/ef1132e9-78b9-4d53-b52d-2b6411829135/resourceGroups/RG-rtudosa/providers/Microsoft.Compute/galleries/AzureComputeGallery/images/Windows2022Datacenter/versions/0.0.2'
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
